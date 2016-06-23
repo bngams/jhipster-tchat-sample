@@ -1,0 +1,27 @@
+<div ng-cloak>
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Ma page de tchat</h1>
+        </div>
+        <div class="col-md-4">
+            <ul>
+                <li ng-repeat="user in vm.participants">{{user.username}}</li>
+            </ul>
+        </div>
+        <div class="col-md-8">
+            <div class="col-md-12">
+                <span>Nouveau message</span>
+                <input type="text" name="tchat" value="" ng-model="vm.message" placeholder="Mon message">
+                 <span class="count" ng-bind="vm.max - vm.message.length" ng-class="{danger: vm.message.length > vm.max}">{{vm.max}}</span>
+                <button type="button" name="button" ng-click="vm.sendMessage()" ng-disabled="vm.message.length > vm.max || vm.message.length === 0"> Envoyer</button>
+            </div>
+            <div class="col-md-12">
+                <h3>Conversation</h3>
+                <div ng-repeat="message in vm.messages | orderBy:'time':true">
+                    <time>{{message.time | date:'HH:mm'}}</time>
+                    <span ng-class="{self: message.self}">{{message.message}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
